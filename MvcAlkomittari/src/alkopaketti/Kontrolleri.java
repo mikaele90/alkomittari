@@ -29,19 +29,16 @@ public class Kontrolleri {
         
     }
     
-    public String nimi() {
-        String kayttajaNimi = kayttaja.getNimi();
-        return kayttajaNimi;
+        public String nimi() {
+        return kayttaja.getNimi();
     }
     
     public double paino() {
-        double kayttajaPaino = kayttaja.getPaino();
-        return kayttajaPaino;
+        return kayttaja.getPaino();
     }
     
     public int sukupuoli() {
-        int kayttajaSukupuoli = kayttaja.getSukupuoli();
-        return kayttajaSukupuoli;
+        return kayttaja.getSukupuoli();
     }
     
     public void uusiNimi(String lisaaNimi) {
