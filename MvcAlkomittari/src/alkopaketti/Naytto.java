@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package alkopaketti;
 
 import javax.swing.AbstractButton;
@@ -19,10 +14,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-/**
- *
- * @author Mikael
- */
 public class Naytto {
     
     private Kontrolleri kontrolleri;
@@ -80,12 +71,12 @@ public class Naytto {
     
     //tästä pitäis tehdä päänäyttö
     public void kayttajaNaytto() {
-        naytaViesti( kontrolleri.nimi() + " " + Double.toString(kontrolleri.paino()) + " " + kontrolleri.sukupuoli() + " " + Double.toString(kontrolleri.nesteMaara()) );
+        naytaViesti("Juothan kohtuudella " + kontrolleri.nimi() + ".");
         
         int valinta;
         
         do {
-            String[] juomaValinta = {"Keskari", "Nelonen", "Viini", "Viinaa", "Käsidesi"};
+            String[] juomaValinta = {"Keskari", "Nelonen", "Viini", "Viinaa", "Käsidesi", "Promilleni nyt?"};
             valinta = JOptionPane.showOptionDialog(null, "Mitäs juodaan?", "Valintaikkuna", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, juomaValinta, juomaValinta[0]);
             System.out.println(valinta);
             if (ajastinAloitettu == false) {
@@ -110,7 +101,11 @@ public class Naytto {
             System.out.println(pg + " Oon täs8");
             as = kontrolleri.aikaKunnesSelva();
             System.out.println(as + " Oon täs9");
-            naytaViesti ("Alkoholi palanut " + as/3600 + " tunnin kuluttua.\nTämänhetkinen promillemääräsi on: " + pr*1000);
+            int t = (int) as/60;
+            int hours = t / 60;
+            int minutes = t % 60;
+            naytaViesti (String.format("Tämänhetkinen promillemääräsi on: " + Math.round(pr*1000*100) / 100.0+ " Promillea."
+                    + "\nAlkoholi on palanut noin %d tunnin %d minuutin kuluttua.", hours, minutes));
         } while (valinta >= 0);
         
     }
