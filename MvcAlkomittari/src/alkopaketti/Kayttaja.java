@@ -15,12 +15,13 @@ public class Kayttaja {
     private String nimi;
     private int sukupuoli;
     private double paino;
+    private double nesteMaara;
     
-    //konstruktori 
-    public Kayttaja(String nimi, int sukupuoli, double paino) {
+    public Kayttaja(String nimi, int sukupuoli, double paino, double nesteMaara) {
         this.nimi = nimi;
         this.sukupuoli = sukupuoli;
         this.paino = paino;
+        this.nesteMaara = nesteMaara;
     }
     
     //Tässä luokassa varmaan jonkin verran päällekkäisyyttä, 
@@ -42,12 +43,21 @@ public class Kayttaja {
         this.sukupuoli = annettuSukupuoli;
     }
     
+    public void setNesteMaara() {
+        if (this.sukupuoli == 0) {
+            this.nesteMaara = 0.75 * paino * 1000;
+        }
+        else {
+            this.nesteMaara = 0.66 * paino * 1000;
+        }
+    }
+    
     //hae nimi -metodi
     public String getNimi() {
         return this.nimi;
     }
     
-        //sama
+    //sama
     public double getPaino() {
         return this.paino;
     }
@@ -56,5 +66,10 @@ public class Kayttaja {
     public int getSukupuoli() {
         return this.sukupuoli;
     }
+    
+    public double getNesteMaara() {
+        return this.nesteMaara;
+    }
+    
     
 }

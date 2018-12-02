@@ -14,12 +14,16 @@ public class Kontrolleri {
     //ominaisuudet
     private Naytto naytto;
     private Kayttaja kayttaja;
+    private Juomat juomat;
+    private HumalaLaskuri laskuri;
     
     //Ajetaan tämä kun main metodi alkaa
     public Kontrolleri() {
         
         naytto = new Naytto();
-        kayttaja = new Kayttaja(null, 0, 0); // tämä varmaan turha ainakin tässä vaiheessa
+        kayttaja = new Kayttaja(null, 0, 0, 0);
+        juomat = new Juomat();
+        laskuri = new HumalaLaskuri();
         
         //vedetty suoraan esimerkistä
         naytto.rekisteroiOhjain(this);
@@ -50,6 +54,46 @@ public class Kontrolleri {
         return kayttaja.getSukupuoli();
     }
     
+    public double nesteMaara() {
+        return kayttaja.getNesteMaara();
+    }
+    
+    public double juo(int juomaIndex) {
+        return juomat.getAlcGrammat(juomaIndex);
+    }
+    
+    public double promillet(double alcGrammat, double nesteMaara, double palaneetGrammat) {
+        return laskuri.lisaa(alcGrammat, nesteMaara);
+    }
+    
+    public double juodutGrammat() {
+        return laskuri.nautitutGrammat();
+    }
+    
+    public double palamisAika(double paino) {
+        return laskuri.palamisAika(paino);
+    }
+    
+    public double henkiloBurnRate(double paino) {
+        return laskuri.henkiloGrammatSekunnissa(paino);
+    }
+    
+    public double palaneetGrammat(double paino) {
+        return laskuri.palaneetGrammat(paino);
+    }
+    
+    public long alkuhetki() {
+        return laskuri.alkuAika();
+    }
+    
+    public long kulunutAika() {
+        return laskuri.vierahtanytAika();
+    }
+    
+    public double aikaKunnesSelva() {
+        return laskuri.aikaSelvaksi();
+    }
+    
     //metodi, jonka avulla voidaan voidaan välittää UI:sta Kayttaja-luokkaan nimi
     public void uusiNimi(String lisaaNimi) {
         kayttaja.setNimi(lisaaNimi);
@@ -63,6 +107,10 @@ public class Kontrolleri {
     //sama kuin yllä
     public void uusiSukupuoli(int lisaaSukupuoli) {
         kayttaja.setSukupuoli(lisaaSukupuoli);
+    }
+    
+    public void uusiNesteMaara() {
+        kayttaja.setNesteMaara();
     }
     
     //main() metodi
