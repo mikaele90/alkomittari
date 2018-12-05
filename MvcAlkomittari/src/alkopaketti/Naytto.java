@@ -31,8 +31,9 @@ public class Naytto {
     
     //eka screeni
     public void aloitusNaytto() {
-        naytaViesti("Tervetuloa Alkomittari++:aan.\n"
-                + "Tämä ohjelma on vitsi, eli älkää plz haastako oikeuteen ;_;");
+        naytaViesti("Tervetuloa Alkomittariin.\n"
+                + "Tämä ohjelma ei ole täysin tarkka. Emme ota mitään vastuuta tästä eteenpäin.\n"
+                + "Painamalla OK, hyväksyt olevasi itse itsestäsi vastuussa.");
     }
     
     //luodaan käyttäjä
@@ -58,7 +59,16 @@ public class Naytto {
         int ok = JOptionPane.showConfirmDialog(null, kayttajaTiedot, "Anna tiedot.", JOptionPane.OK_CANCEL_OPTION);
             if (ok == JOptionPane.OK_OPTION) {
                 kontrolleri.uusiNimi( nimi.getText() ); //Välitetään käyttäjän syötteet kontrollerille, joka välittää ne eteenpäin kayttaja-luokalle
-                kontrolleri.uusiPaino( Double.parseDouble( paino.getText() ) ); //sama
+                if (nimi.getText().length() <= 0) {
+                    kontrolleri.uusiNimi("Anonyymi");
+                }
+                try {
+                    kontrolleri.uusiPaino( Double.parseDouble( paino.getText() ) ); //sama
+                }
+                catch(NumberFormatException e) {
+                    naytaViesti("Syötä paino.");
+                    luoKayttaja();
+                }
                 kontrolleri.uusiSukupuoli( sukupuoliValikko.getSelectedIndex() ); //sama
                 kontrolleri.uusiNesteMaara();
             }
@@ -76,22 +86,23 @@ public class Naytto {
         int valinta;
         
         do {
-            String[] juomaValinta = {"Keskari", "Nelonen", "Viini", "Viinaa", "Käsidesi", "Promilleni nyt?"};
+            String[] juomaValinta = {"Keskari 0,3" , "Keskari 0,5", "Nelonen 0,3" , "Nelonen 0,5", "Viini 12cl", "shotti 40%", "Käsidesi", "Promilleni nyt?"};
             valinta = JOptionPane.showOptionDialog(null, "Mitäs juodaan?", "Valintaikkuna", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, juomaValinta, juomaValinta[0]);
             System.out.println(valinta);
             if (ajastinAloitettu == false) {
                 aa = kontrolleri.alkuhetki();
                 ajastinAloitettu = true;
             }
+            if (valinta == -1) {
+                exit();
+            }
             ag = kontrolleri.juo(valinta);
-            nm = (kontrolleri.nesteMaara() / 1000);
+            nm = (kontrolleri.nesteMaara());
             System.out.println(ag + "  " + nm + "  Oon täs1");
-            pr = kontrolleri.promillet(ag, kontrolleri.nesteMaara(), kontrolleri.palaneetGrammat(kontrolleri.paino()));
+            pr = kontrolleri.promillet(ag, nm);
             System.out.println(pr * 1000 + " Oon täs2");
             ng = kontrolleri.juodutGrammat();
             System.out.println(ng + " Oon täs3");
-            pa = kontrolleri.palamisAika(kontrolleri.paino());
-            System.out.println(pa + " Oon täs4");
             System.out.println(aa + " Oon täs5");
             ka = kontrolleri.kulunutAika();
             System.out.println(ka + " Oon täs6");
@@ -104,8 +115,31 @@ public class Naytto {
             int t = (int) as/60;
             int hours = t / 60;
             int minutes = t % 60;
+            double tammonen = Math.round(pr*1000*100) / 100.0;
+            if (tammonen >= 0 && tammonen < 0.5) {
             naytaViesti (String.format("Tämänhetkinen promillemääräsi on: " + Math.round(pr*1000*100) / 100.0+ " Promillea."
-                    + "\nAlkoholi on palanut noin %d tunnin %d minuutin kuluttua.", hours, minutes));
+                    + "\nAlkoholi on palanut noin %d tunnin %d minuutin kuluttua.\nEi tunnu missään.", hours, minutes));
+            }
+            else if (tammonen > 0.5 && tammonen < 1.0) {
+            naytaViesti (String.format("Tämänhetkinen promillemääräsi on: " + Math.round(pr*1000*100) / 100.0+ " Promillea."
+                    + "\nAlkoholi on palanut noin %d tunnin %d minuutin kuluttua.\nEthän lähde enää ajamaan.", hours, minutes));
+            }
+            else if (tammonen > 1.0 && tammonen < 1.75) {
+            naytaViesti (String.format("Tämänhetkinen promillemääräsi on: " + Math.round(pr*1000*100) / 100.0+ " Promillea."
+                    + "\nAlkoholi on palanut noin %d tunnin %d minuutin kuluttua.\nDarra on jo taattu....", hours, minutes));
+            }
+            else if (tammonen > 1.75 && tammonen < 2.5) {
+            naytaViesti (String.format("Tämänhetkinen promillemääräsi on: " + Math.round(pr*1000*100) / 100.0+ " Promillea."
+                    + "\nAlkoholi on palanut noin %d tunnin %d minuutin kuluttua.\nHuominen on huomenna t. JVG : D.", hours, minutes));
+            }
+            else if (tammonen > 2.5 && tammonen < 3.8) {
+            naytaViesti (String.format("Tämänhetkinen promillemääräsi on: " + Math.round(pr*1000*100) / 100.0+ " Promillea."
+                    + "\nAlkoholi on palanut noin %d tunnin %d minuutin kuluttua.\nTanssi vielä kun osaat.", hours, minutes));
+            }
+            else if (tammonen > 3.8) {
+            naytaViesti (String.format("Tämänhetkinen promillemääräsi on: " + Math.round(pr*1000*100) / 100.0+ " Promillea."
+                    + "\nAlkoholi on palanut noin %d tunnin %d minuutin kuluttua.\nOisikohan aika mennä nukkumaan...", hours, minutes));
+            }
         } while (valinta >= 0);
         
     }

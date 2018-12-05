@@ -4,8 +4,9 @@ public class HumalaLaskuri {
     
     private Kontrolleri kontrolleri;
     private double promillet = 0;
+    private double grammatTotal = 0;
     private double grammat = 0;
-    private double aika = 0;
+    private double palamisAika = 0;
     private double palaneetGrammat = 0;
     private double henkiloGrammatSekunnissa = 0;
     private double aikaSelvaksi;
@@ -19,18 +20,19 @@ public class HumalaLaskuri {
     }
 
     public double lisaa(double etanoliGrammat, double nesteMaara) {
-        this.grammat = (this.grammat - this.palaneetGrammat) + etanoliGrammat;
-        this.promillet = this.grammat / nesteMaara;
+        this.grammatTotal = this.grammatTotal + etanoliGrammat;
+        this.promillet = ((this.grammatTotal-this.palaneetGrammat) / nesteMaara);
         return this.promillet;
     }
     
+
     public double nautitutGrammat() {
-        return this.grammat;
+        return this.grammatTotal;
     }
     
     public double palamisAika(double paino) {
-        aika = (this.grammat / (paino * 0.1)) * 3600;
-        return aika;
+        palamisAika = (this.grammat / (paino * 0.1)) * 3600;
+        return palamisAika;
     }
     
     public double henkiloGrammatSekunnissa(double paino) {
@@ -55,7 +57,7 @@ public class HumalaLaskuri {
     }   
     
     public double aikaSelvaksi() {
-        this.aikaSelvaksi = (this.grammat - this.palaneetGrammat) / this.henkiloGrammatSekunnissa;
+        this.aikaSelvaksi = (this.grammatTotal - this.palaneetGrammat) / this.henkiloGrammatSekunnissa;
         return this.aikaSelvaksi;
     }
     

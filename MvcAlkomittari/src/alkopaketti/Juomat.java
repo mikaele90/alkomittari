@@ -65,7 +65,7 @@ public class Juomat {
             case 7:
                 this.nimi = "Promilleni nyt? (" + tilavuus + "cl," + alcProsentit + "%)";
                 this.tilavuus = 0.0;
-                this.alcProsentit = 0.001;
+                this.alcProsentit = 0.0;
                 this.alcGrammat = 0;
                 return this.alcGrammat;
             default:

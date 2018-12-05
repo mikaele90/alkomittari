@@ -53,7 +53,7 @@ public class Kontrolleri {
         return juomat.getAlcGrammat(juomaIndex);
     }
     
-    public double promillet(double alcGrammat, double nesteMaara, double palaneetGrammat) {
+    public double promillet(double alcGrammat, double nesteMaara) {
         return laskuri.lisaa(alcGrammat, nesteMaara);
     }
     
