@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package alkopaketti;
 
-/**
- *
- * @author Mikael
- */
 public class Juomat {
     
     private String nimi;
@@ -17,6 +8,7 @@ public class Juomat {
     public Juomat() {
     }
     
+    //Juomalista
     public double getAlcGrammat(int juomanIndex) {
         
         switch (juomanIndex) {
@@ -69,7 +61,7 @@ public class Juomat {
                 this.alcGrammat = 0;
                 return this.alcGrammat;
             default:
-                this.nimi = "Lopetus";
+                this.nimi = "Tarkistus";
                 this.tilavuus = 0;
                 this.alcProsentit = 0;
                 this.alcGrammat = 0;

@@ -3,10 +3,10 @@ package alkopaketti;
 public class Kontrolleri {
     
     //ominaisuudet
-    private Naytto naytto;
-    private Kayttaja kayttaja;
-    private Juomat juomat;
-    private HumalaLaskuri laskuri;
+    final private Naytto naytto;
+    final private Kayttaja kayttaja;
+    final private Juomat juomat;
+    final private HumalaLaskuri laskuri;
     
     //Ajetaan tämä kun main metodi alkaa
     public Kontrolleri() {
@@ -16,7 +16,6 @@ public class Kontrolleri {
         juomat = new Juomat();
         laskuri = new HumalaLaskuri();
         
-        //vedetty suoraan esimerkistä
         naytto.rekisteroiOhjain(this);
         
         //yksikertainen tervehdys
@@ -61,24 +60,20 @@ public class Kontrolleri {
         return laskuri.nautitutGrammat();
     }
     
-    public double palamisAika(double paino) {
-        return laskuri.palamisAika(paino);
-    }
-    
     public double henkiloBurnRate(double paino) {
         return laskuri.henkiloGrammatSekunnissa(paino);
     }
     
-    public double palaneetGrammat(double paino) {
-        return laskuri.palaneetGrammat(paino);
+    public double palaneetGrammat() {
+        return laskuri.palaneetGrammat();
     }
     
     public long alkuhetki() {
         return laskuri.alkuAika();
     }
     
-    public long kulunutAika() {
-        return laskuri.vierahtanytAika();
+    public long kulunutAikaTotal() {
+        return laskuri.vierahtanytAikaTotal();
     }
     
     public double aikaKunnesSelva() {

@@ -5,8 +5,7 @@ public class Kayttaja {
     //ominaisuudet
     private String nimi;
     private int sukupuoli;
-    private double paino;
-    private double nesteMaara;
+    private double paino, nesteMaara;
     
     public Kayttaja(String nimi, int sukupuoli, double paino, double nesteMaara) {
         this.nimi = nimi;
